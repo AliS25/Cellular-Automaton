@@ -155,8 +155,14 @@ let ruleNumber=document.querySelector('input');
 ruleNumber.addEventListener('input', function(){
     let bin=Number(ruleNumber.value).toString(2);
     console.log(bin);
-    for(let i=0;i<bin.length;i++){
-        let rulerep=document.querySelector('#rule'+i+'3')
-        if(bin.charAt(bin.length-i)==1)rules.
+    for(let i=0;i<8;i++){
+        let rulerep=document.getElementById('rule'+i+'3')
+        if(bin.length-i>0){
+if(bin.charAt(bin.length-i-1)==1 & rulerep.style.backgroundColor=='white')rulerep.click();
+else if(bin.charAt(bin.length-i-1)==0 & rulerep.style.backgroundColor=='black')rulerep.click();
+        }
+        else {
+            if(rulerep.style.backgroundColor=='black')rulerep.click();
+        }
     }
 })

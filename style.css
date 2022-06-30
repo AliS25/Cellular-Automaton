@@ -31,9 +31,7 @@ html{
     grid-template-columns: repeat(3,1fr);
     gap:5px;
 }
-#rule00,#rule01,#rule02,#rule10, #rule11, #rule20, #rule22, #rule30,#rule41,#rule42,#rule51,#rule62{
-    background-color:white;
-}
+
 .ruleCell{
     border-radius: 10px;
 }
