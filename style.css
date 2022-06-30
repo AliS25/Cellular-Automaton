@@ -4,12 +4,14 @@
     height: 100%;
     margin:0 auto;
     display: grid;
-    grid-template-columns: repeat(32, 1fr);
+   /* grid-template-columns: repeat(32, 1fr);*/
     gap:3px;
     grid-auto-rows: 30px;
 }
 html{
-    background-color:lavender;
+    background-color: #FFDEE9;
+    background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+    
 }
 .ruleBox{
     background-color:aquamarine;

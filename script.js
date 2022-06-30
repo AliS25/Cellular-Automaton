@@ -1,3 +1,4 @@
+function all(size){
 //2d array keeping track of states
 let cells=[];
 //first row of the universe
@@ -11,6 +12,7 @@ cells.push(firstGen);
     const rules=[true,true,true,true,true,true,true,true]
     let ruleNum=255;
 let msg = document.createElement('h2');
+msg.setAttribute('class','msg')
 
 const ruleBox=document.createElement('div');
 ruleBox.setAttribute('class','ruleBox')
@@ -48,7 +50,7 @@ rules[''+i]=true;
         console.log(cells.pop());
     }
 for(let i=1;i<256;i++){
-for(let j=0;j<32;j++){
+for(let j=0;j<size;j++){
     panel.querySelector('.child').remove();
 }
 }
@@ -68,10 +70,11 @@ body.appendChild(msg);
 const panel=document.createElement('div');
 //panel id
 panel.setAttribute('id','main');
+panel.style.gridTemplateColumns='repeat('+size+',1fr)';
 //add panel to the body of the html doc
 body.appendChild(panel)
 //loop to create the top row of the universe of cells
-    for(let i=0;i<32;i++){
+    for(let i=0;i<size;i++){
         //each cell is a div element
         const box = document.createElement('div');
         //all the cells have class "box"
@@ -99,7 +102,7 @@ cells[0][box.getAttribute('name')]=true;
             console.log(cells.pop());
         }
 for(let i=1;i<256;i++){
-    for(let j=0;j<32;j++){
+    for(let j=0;j<size;j++){
         panel.querySelector('.child').remove();
     }
     }
@@ -114,12 +117,12 @@ for(let i=1;i<256;i++){
 for(let i=1;i<256;i++){
 let newCells=[];
 cells.push(newCells);
-    for(let j=0;j<32;j++){
+    for(let j=0;j<size;j++){
         let curr=[];
-        if(j===0)curr.push(cells[i-1][31]);
+        if(j===0)curr.push(cells[i-1][size-1]);
         else curr.push(cells[i-1][j-1]);
         curr.push(cells[i-1][j])
-        if(j===31)curr.push(cells[i-1][0]);
+        if(j===size-1)curr.push(cells[i-1][0]);
         else curr.push(cells[i-1][j+1]);
 
         if(curr[0]===false&curr[1]===false&curr[2]===false)
@@ -151,7 +154,7 @@ cells.push(newCells);
     }
 }
 }
-let ruleNumber=document.querySelector('input');
+let ruleNumber=document.querySelector('#ruleNumber');
 ruleNumber.addEventListener('input', function(){
     let bin=Number(ruleNumber.value).toString(2);
     console.log(bin);
@@ -166,3 +169,23 @@ else if(bin.charAt(bin.length-i-1)==0 & rulerep.style.backgroundColor=='black')r
         }
     }
 })
+
+let uni=document.querySelector('.submit');
+let uniSize=document.querySelector('#universeSize')
+uni.addEventListener('click',function(){
+    let boxes = document.querySelectorAll('.ruleBox');
+boxes.forEach(box => {
+  box.remove();
+});
+let messages = document.querySelectorAll('.msg');
+messages.forEach(message => {
+  message.remove();
+});
+let panels = document.querySelectorAll('#main');
+panels.forEach(pan => {
+  pan.remove();
+});
+    all(Number(uniSize.value));
+})
+}
+all(32);
