@@ -10,6 +10,7 @@ cells.push(firstGen);
     //array of the rules
     const rules=[true,true,true,true,true,true,true,true]
     let ruleNum=255;
+    let size=32;
 let msg = document.createElement('h2');
 
 const ruleBox=document.createElement('div');
@@ -48,12 +49,12 @@ rules[''+i]=true;
         console.log(cells.pop());
     }
 for(let i=1;i<256;i++){
-for(let j=0;j<32;j++){
+for(let j=0;j<size;j++){
     panel.querySelector('.child').remove();
 }
 }
 }
-    creatUni();
+    createUni();
 if(rules[''+i]===true)ruleNum+=(2**i);
 else ruleNum-=(2**i);
 msg.textContent = 'This is rule number: '+ruleNum;
@@ -71,7 +72,13 @@ panel.setAttribute('id','main');
 //add panel to the body of the html doc
 body.appendChild(panel)
 //loop to create the top row of the universe of cells
-    for(let i=0;i<32;i++){
+
+
+createUniverse(size);
+
+function createUniverse(size){
+    panel.style.gridTemplateColumns='repeat('+size+',1fr';
+    for(let i=0;i<Number(size);i++){
         //each cell is a div element
         const box = document.createElement('div');
         //all the cells have class "box"
@@ -99,22 +106,23 @@ cells[0][box.getAttribute('name')]=true;
             console.log(cells.pop());
         }
 for(let i=1;i<256;i++){
-    for(let j=0;j<32;j++){
+    for(let j=0;j<Number(size);j++){
         panel.querySelector('.child').remove();
     }
     }
 }
-        creatUni();
+        createUni(size);
         });       
     }
+}
 
 
 
- function creatUni(){
+ function createUni(size){
 for(let i=1;i<256;i++){
 let newCells=[];
 cells.push(newCells);
-    for(let j=0;j<32;j++){
+    for(let j=0;j<Number(size);j++){
         let curr=[];
         if(j===0)curr.push(cells[i-1][31]);
         else curr.push(cells[i-1][j-1]);
@@ -151,7 +159,7 @@ cells.push(newCells);
     }
 }
 }
-let ruleNumber=document.querySelector('input');
+let ruleNumber=document.querySelector('#ruleNumber');
 ruleNumber.addEventListener('input', function(){
     let bin=Number(ruleNumber.value).toString(2);
     console.log(bin);
@@ -165,4 +173,14 @@ else if(bin.charAt(bin.length-i-1)==0 & rulerep.style.backgroundColor=='black')r
             if(rulerep.style.backgroundColor=='black')rulerep.click();
         }
     }
+})
+let uni=document.querySelector('#universeSize');
+uni.addEventListener('input',function(){
+    for(let i=0;i<256;i++){
+        for(let j=0;j<Number(size);j++){
+            panel.querySelector('.child').remove();
+        }
+        }
+        size=Number(uni.value);
+        createUniverse(size);
 })
