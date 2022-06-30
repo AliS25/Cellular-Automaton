@@ -1,3 +1,4 @@
+function all(size){
 //2d array keeping track of states
 let cells=[];
 //first row of the universe
@@ -10,8 +11,8 @@ cells.push(firstGen);
     //array of the rules
     const rules=[true,true,true,true,true,true,true,true]
     let ruleNum=255;
-    let size=32;
 let msg = document.createElement('h2');
+msg.setAttribute('class','msg')
 
 const ruleBox=document.createElement('div');
 ruleBox.setAttribute('class','ruleBox')
@@ -54,7 +55,7 @@ for(let j=0;j<size;j++){
 }
 }
 }
-    createUni();
+    creatUni();
 if(rules[''+i]===true)ruleNum+=(2**i);
 else ruleNum-=(2**i);
 msg.textContent = 'This is rule number: '+ruleNum;
@@ -69,16 +70,11 @@ body.appendChild(msg);
 const panel=document.createElement('div');
 //panel id
 panel.setAttribute('id','main');
+panel.style.gridTemplateColumns='repeat('+size+',1fr)';
 //add panel to the body of the html doc
 body.appendChild(panel)
 //loop to create the top row of the universe of cells
-
-
-createUniverse(size);
-
-function createUniverse(size){
-    panel.style.gridTemplateColumns='repeat('+size+',1fr';
-    for(let i=0;i<Number(size);i++){
+    for(let i=0;i<size;i++){
         //each cell is a div element
         const box = document.createElement('div');
         //all the cells have class "box"
@@ -106,28 +102,27 @@ cells[0][box.getAttribute('name')]=true;
             console.log(cells.pop());
         }
 for(let i=1;i<256;i++){
-    for(let j=0;j<Number(size);j++){
+    for(let j=0;j<size;j++){
         panel.querySelector('.child').remove();
     }
     }
 }
-        createUni(size);
+        creatUni();
         });       
     }
-}
 
 
 
- function createUni(size){
+ function creatUni(){
 for(let i=1;i<256;i++){
 let newCells=[];
 cells.push(newCells);
-    for(let j=0;j<Number(size);j++){
+    for(let j=0;j<size;j++){
         let curr=[];
-        if(j===0)curr.push(cells[i-1][31]);
+        if(j===0)curr.push(cells[i-1][size-1]);
         else curr.push(cells[i-1][j-1]);
         curr.push(cells[i-1][j])
-        if(j===31)curr.push(cells[i-1][0]);
+        if(j===size-1)curr.push(cells[i-1][0]);
         else curr.push(cells[i-1][j+1]);
 
         if(curr[0]===false&curr[1]===false&curr[2]===false)
@@ -174,13 +169,23 @@ else if(bin.charAt(bin.length-i-1)==0 & rulerep.style.backgroundColor=='black')r
         }
     }
 })
-let uni=document.querySelector('#universeSize');
-uni.addEventListener('input',function(){
-    for(let i=0;i<256;i++){
-        for(let j=0;j<Number(size);j++){
-            panel.querySelector('.child').remove();
-        }
-        }
-        size=Number(uni.value);
-        createUniverse(size);
+
+let uni=document.querySelector('.submit');
+let uniSize=document.querySelector('#universeSize')
+uni.addEventListener('click',function(){
+    let boxes = document.querySelectorAll('.ruleBox');
+boxes.forEach(box => {
+  box.remove();
+});
+let messages = document.querySelectorAll('.msg');
+messages.forEach(message => {
+  message.remove();
+});
+let panels = document.querySelectorAll('#main');
+panels.forEach(pan => {
+  pan.remove();
+});
+    all(Number(uniSize.value));
 })
+}
+all(32);
