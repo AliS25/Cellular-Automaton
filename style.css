@@ -1,56 +1,94 @@
-
+/* The container containing the universe of cells */
 #main{
+    /* Set the width and height */
     width:90%;
     height: 100%;
+    /* Set the margin which centers it */
     margin:0 auto;
+    /* Change its display to grid */
     display: grid;
-   /* grid-template-columns: repeat(32, 1fr);*/
+    /* gap between cells */
     gap:3px;
+    /* size of each row */
     grid-auto-rows: 30px;
 }
 html{
+    /* Set the background for the entire page */
     background-color: #FFDEE9;
     background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
-    
+    /* font type */
+    font-family: fantasy;
+    /* space between words */
+    word-spacing: 3px;
 }
+/* The container containing the eight possible states at the top */
 .ruleBox{
-    background-color:aquamarine;
+    /* set its height and width */
     width:90%;
     height:100%;
+    /* set its margin so that it is cenetered */
     margin: 30px auto;
+    /* set space around content */
     padding:50px;
+    /* give it a border with no sharp edges */
     border: 10px dotted crimson;
     border-radius: 30px;
+    /* Make its display a grid */
     display:grid;
+    /* make the grid have four columns per row */
     grid-template-columns: repeat(4,1fr);
+    /* gap between the  elements of the grid*/
     gap:50px;
+    /* size of each row */
     grid-auto-rows: minmax(100px,auto);
 }
+/* The container representing a rule*/
 .ruleElement{
+    /* set space around content */
     padding:10px;
-    background-color:crimson;
+    /* make its display a grid */
     display:grid;
+    /* make the grid have 3 columns per row */
     grid-template-columns: repeat(3,1fr);
+    /* The gap between the elements of the grid */
     gap:5px;
 }
-
+/* The cells inside each rule */
 .ruleCell{
+    /* Make the edges less sharp and more circular */
     border-radius: 10px;
 }
-
+/* The cells inside each rule that the user can interact with */
 .ruleCell[name="3"]{
+    /* Place them in the second column */
 grid-column:2;
+/* give it a border */
+border:3px solid crimson;
 }
-
+/* The main heading */
 h1{
+    /* text color */
     color:crimson;
+    /* space around content*/
     padding:5px;
+    /* give it a border */
     border:5px solid lime;
+    /* make its width equal to the size of its content */
     width:fit-content;
-    text-shadow: aqua 10px 5px;
+    /* give the text a shadow */
+    text-shadow: 5px 13px black;
 }
+/* The sub=heading */
 h2{
+    /* Text color */
     color:fuchsia;
+    /* space around content */
     padding:3px;
+    /* underline */
 text-decoration-line: underline;
+}
+/* Labels for input elements */
+label{
+    /* text color */
+    color:crimson;
 }
